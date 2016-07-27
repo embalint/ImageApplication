@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="05a7c8a94a0da7a4ee4c36878079a8daac7e3217">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_40ace0d08c353ba5f79da0c1347f07c948bf40ba\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_7bf59dec95a709d48679af5d12e6be8018381756\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-simplexml\2.1.0\a71c37fa341165df2c61ba93f549c4ceeb98d6c8\converter-simplexml-2.1.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="a71c37fa341165df2c61ba93f549c4ceeb98d6c8">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-simplexml-2.1.0_2c09568515857039590be53e1e6e8e4b85707edd\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.1.1_7c1bd60d6ce0f4ff832d5249694f9def256166db\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="4157816e81f0820983957687e9a6f4c1cea0f1e5">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.1.0_a34bb73ba0281062baea4a60ff06cacdf08cae78\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="fe9838bff7517e366dda289be4db7b4dee5b9a56">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6ff8a7e9c5382df6a65984765103ebf8460751ee\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_c64100ea5028bef68b44315f1024d3a1c44449e4\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\SDK\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.1.1_5e6f661be80c7ceedfca78a59b05e36261ee794c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.1.1_856f588cb7507fe68aef6674840c6b38358cf628\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\design\24.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="8620c018c108eed501bbdb85324b79136373ea44">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.1.0_33eac2b17ca0a71017a09e997b6534c777af2d3e\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.1.1_35100ab789415e10c67195fc2a02aaab6e7eb69b\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.1.1_f2a19a7f859069fe32ea8b2981da0db2c7d95874\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.0_f6272a9774527c11e4bd5f885400c31b91d009e8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.1.1_eace11270c192ba53aea6556c75c3e1f0b7debe5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Emil\.gradle\caches\modules-2\files-2.1\org.simpleframework\simple-xml\2.7.1\dd91fb744c2ff921407475cb29a1e3fee397d411\simple-xml-2.7.1.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="dd91fb744c2ff921407475cb29a1e3fee397d411">
+        <dex dex="C:\Users\Emil\Documents\GitHub\ImageApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10\simple-xml-2.7.1_f84d1777b72a752cac6b7bc8d73895039b55738b\classes.dex" />
+    </item>
+
+</items>
