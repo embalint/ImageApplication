@@ -1,25 +1,27 @@
 package com.example.krunoslavtill.imageapplication.Models;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+
+import java.util.List;
 
 /**
  * Created by krunoslavtill on 27/07/16.
  */
-@Root(strict=false)
+@Root(name="homePictures",strict=false)
 public class Homepictures {
-    /*
-    @Element(name = "prevPicture")
-    private PrevPicture prevPicture;
 
-    public PrevPicture getPrevPicture() {
-        return prevPicture;
+    @ElementList(name = "prevPicture",inline = true)
+    List<PrevPicture> prevPictureList;
+
+    public List<PrevPicture> getPrevPictureList() {
+        return prevPictureList;
     }
 
-    public void setPrevPicture(PrevPicture prevPicture) {
-        this.prevPicture = prevPicture;
+    public void setPrevPictureList(List<PrevPicture> prevPictureList) {
+        this.prevPictureList = prevPictureList;
     }
-    */
 }
 
 

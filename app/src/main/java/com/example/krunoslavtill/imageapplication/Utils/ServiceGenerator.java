@@ -1,4 +1,4 @@
-package com.example.krunoslavtill.imageapplication;
+package com.example.krunoslavtill.imageapplication.Utils;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

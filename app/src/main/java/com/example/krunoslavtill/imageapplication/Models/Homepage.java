@@ -2,7 +2,10 @@ package com.example.krunoslavtill.imageapplication.Models;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+
+import java.util.List;
 
 /**
  * Created by krunoslavtill on 27/07/16.
@@ -11,17 +14,16 @@ import org.simpleframework.xml.Root;
 
 @Root(strict=false)
 public class Homepage {
-    /*
-    @Element(name = "homeNews")
-    private Homenews homenews;
 
-    public Homenews getHomenews() {
-        return homenews;
+    @ElementList(name = "homeNews",inline = true)
+    List<Homenews> homenewsList;
+
+    public List<Homenews> getHomenewsList() {
+        return homenewsList;
     }
 
-    public void setHomenews(Homenews homenews) {
-        this.homenews = homenews;
+    public void setHomenewsList(List<Homenews> homenewsList) {
+        this.homenewsList = homenewsList;
     }
-    */
 }
 
