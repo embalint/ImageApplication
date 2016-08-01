@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 /**
  * Created by krunoslavtill on 27/07/16.
  */
-@Root(strict=false)
+@Root(name = "meritum",strict=false)
 public class Meritum {
     @Element(name = "header")
     private Head header;
@@ -18,13 +18,13 @@ public class Meritum {
     @Element(name = "dimTv",required=false)
     private DimTv dimtv;
 
-    @Element(name = "playerInfo")
+    @Element(name = "playerInfo",required=false)
     private PlayerInfo playerinfo;
 
-    @Element(name = "leagueStandings")
+    @Element(name = "leagueStandings",required=false)
     private LeagueStandings leaguestandings;
 
-    @Element(name = "appTerms")
+    @Element(name = "appTerms",required=false)
     private AppTerms appterms;
 
     public Head getHeader() {
