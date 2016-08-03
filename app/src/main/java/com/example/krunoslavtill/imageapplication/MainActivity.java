@@ -6,18 +6,12 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.bumptech.glide.Glide;
 import com.example.krunoslavtill.imageapplication.APIcalls.GetImage;
-import com.example.krunoslavtill.imageapplication.Models.Homenews;
-import com.example.krunoslavtill.imageapplication.Models.Meritum;
-import com.example.krunoslavtill.imageapplication.Models.PrevPicture;
-import com.example.krunoslavtill.imageapplication.Utils.DataDownload;
-import com.example.krunoslavtill.imageapplication.Utils.ImageLoaderConfig;
+import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.Threads.RetrofitListFillerThread;
+import com.example.krunoslavtill.imageapplication.Utils.HttpErrorHandler;
 import com.example.krunoslavtill.imageapplication.Utils.ServiceGenerator;
-import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,21 +19,26 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Homenews> homenewsList= new ArrayList<>();
+
     Homenews a;
-    int height,width;
-    boolean threadFlag=false;
+    int height, width;
+    boolean threadFlag = false;
+    long startTime;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //setContentView(R.layout.activity_main);
-        //ThreadParser tp = new ThreadParser();
-        //tp.execute(i);
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         height = displaymetrics.heightPixels;
         width = displaymetrics.widthPixels;
+
+
+        Runtime.getRuntime().gc();
+        startTime = System.currentTimeMillis();
+
 
         getData();
 
@@ -47,102 +46,103 @@ public class MainActivity extends AppCompatActivity {
 
     public void getData() {
 
-        try{
+        try {
             GetImage taskService = ServiceGenerator.createService(GetImage.class);
             Call<Meritum> call = taskService.getImages();
 
+            double retStart = (System.currentTimeMillis() - startTime);
+            Log.d("TimeApp", "Starting retrofit " + retStart + " mili secs");
             call.enqueue(new Callback<Meritum>() {
                 @Override
                 public void onResponse(Call<Meritum> call, Response<Meritum> response) {
-                    if(call.isExecuted()){
-                        threadFlag=true;
-                        if (response.isSuccessful()) {
-
-                            homenewsList =response.body().getHomepage().getHomenewsList();
-                            Registry.getInstance().set("homeNewsList",homenewsList);
-                            finishSplash();
 
 
-                        } else {
-                            Log.d("Error", response.errorBody().toString());
+                    if (response.isSuccessful()) {
 
-                        }
 
-                    }
-                    else {
-                        Log.d("Error", response.errorBody().toString());
+                        double retStart = (System.currentTimeMillis() - startTime);
+                        Log.d("TimeApp", "Finish retrofit " + retStart + " mili secs");
+                        threadFlag = true;
+                        new RetrofitListFillerThread(response.body(),threadFlag,getApplicationContext(),width);
 
+                        //
+
+                        finishSplash();
+
+
+                    } else {
+                        Log.d("Error1", response.errorBody().toString());
+                        new HttpErrorHandler(getApplicationContext(), response.code());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Meritum> call, Throwable t) {
-                    // something went completely south (like no internet connection)
-                    Log.d("Error", "greskaa"+t.getMessage());
 
+                    new HttpErrorHandler(getApplicationContext(), t,MainActivity.this);
+                    Log.d("Error1", t.getMessage());
                 }
 
             });
 
-
-
-        }
-        catch (Exception e){
-            Log.d("Display",e.toString());
+        } catch (Exception e) {
+            Log.d("Error1", e.toString());
 
         }
 
 
     }
 
-    public void finishSplash(){
-        if(threadFlag){
+
+
+    public void finishSplash() {
+        /*
+        if (threadFlag) {
 
             ImageLoaderConfig ilc = new ImageLoaderConfig(getApplicationContext());
-            Registry.getInstance().set("ImageLoaderConfig",ilc);
-            Log.d("Display","visina mobitela je "+ height+ " sirina mobitela je : "+ width);
-            List<PrevPicture> prevPictureListURL=new ArrayList<>();
-            List<String> newsURL=new ArrayList<>();
-            List<Integer> bestDifferance=new ArrayList<>();
-            int position=0;
-            for (int i = 0;i<homenewsList.size();i++){
+            Registry.getInstance().set("ImageLoaderConfig", ilc);
+            Log.d("Display", "visina mobitela je " + height + " sirina mobitela je : " + width);
+            List<PrevPicture> prevPictureListURL = new ArrayList<>();
+            List<String> newsURL = new ArrayList<>();
+            List<Integer> bestDifferance = new ArrayList<>();
+            int position = 0;
+            for (int i = 0; i < homenewsList.size(); i++) {
 
-                List<PrevPicture> prevPictureList=homenewsList.get(i).getHomepictures().getPrevPictureList();
+                List<PrevPicture> prevPictureList = homenewsList.get(i).getHomepictures().getPrevPictureList();
                 newsURL.add(homenewsList.get(i).getNewsTitle());
-                int smallestDifferance=0;
+                int smallestDifferance = 0;
                 // checking if width of picutre is acceptable for with of phone
-                for (int loop=0;loop<prevPictureList.size();loop++){
+                for (int loop = 0; loop < prevPictureList.size(); loop++) {
 
 
-                    int currientWidth= Integer.parseInt(prevPictureList.get(0).getPicWidth());
-                    int startDifferance = Math.abs(width-currientWidth);
-                    int dinamicWidth=Integer.parseInt(prevPictureList.get(loop).getPicWidth());
-                    int otherDifference = Math.abs(width-dinamicWidth);
-                    if(startDifferance==otherDifference){
-                        smallestDifferance=startDifferance;
+                    int currientWidth = Integer.parseInt(prevPictureList.get(0).getPicWidth());
+                    int startDifferance = Math.abs(width - currientWidth);
+                    int dinamicWidth = Integer.parseInt(prevPictureList.get(loop).getPicWidth());
+                    int otherDifference = Math.abs(width - dinamicWidth);
+                    if (startDifferance == otherDifference) {
+                        smallestDifferance = startDifferance;
                     }
-                    if(otherDifference<smallestDifferance){
-                        smallestDifferance=otherDifference;
-                        position=loop;
+                    if (otherDifference < smallestDifferance) {
+                        smallestDifferance = otherDifference;
+                        position = loop;
                     }
 
                 }
-                Glide.with(getApplicationContext()).load(prevPictureList.get(position).getPicURL()).downloadOnly(500,500);
-                Log.d("Display", "broj ispisa" + i+ "pozicija"+position+" ima najmanju velicinu : " + String.valueOf(smallestDifferance));
+                //Glide.with(getApplicationContext()).load(prevPictureList.get(position).getPicURL()).downloadOnly(500,500);
+                imageLoader.loadImage(prevPictureList.get(position).getPicURL(), null);
+                Log.d("Display", "broj ispisa" + i + "pozicija" + position + " ima najmanju velicinu : " + String.valueOf(smallestDifferance));
                 prevPictureListURL.add(prevPictureList.get(position));
-
-                //Glide.with(getApplicationContext()).load(prevPictureList.get(0).getPicURL()).downloadOnly(500,500);
 
 
             }
-            Registry.getInstance().set("pictures",prevPictureListURL);
-            Registry.getInstance().set("newsURL",newsURL);
+            Registry.getInstance().set("pictures", prevPictureListURL);
+            Registry.getInstance().set("newsURL", newsURL);
+            */
+        Intent mainIntent = new Intent(MainActivity.this, HomePage.class);
+        MainActivity.this.startActivity(mainIntent);
+        MainActivity.this.finish();
 
-            Intent mainIntent = new Intent(MainActivity.this,HomePage.class);
-            MainActivity.this.startActivity(mainIntent);
-            MainActivity.this.finish();
-
-        }
+        //}
 
     }
 

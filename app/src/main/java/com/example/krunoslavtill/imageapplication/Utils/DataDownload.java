@@ -1,17 +1,13 @@
 package com.example.krunoslavtill.imageapplication.Utils;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.example.krunoslavtill.imageapplication.APIcalls.GetImage;
-import com.example.krunoslavtill.imageapplication.HomePage;
-import com.example.krunoslavtill.imageapplication.MainActivity;
-import com.example.krunoslavtill.imageapplication.Models.Homenews;
-import com.example.krunoslavtill.imageapplication.Models.Meritum;
-import com.example.krunoslavtill.imageapplication.Models.PrevPicture;
+import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.RetrofitModels.PrevPicture;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 
 import java.util.ArrayList;

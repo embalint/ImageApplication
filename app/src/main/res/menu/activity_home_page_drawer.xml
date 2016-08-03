@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <group android:checkableBehavior="single">
+        <item android:title="Image Frameworks">
+        <item
+            android:id="@+id/lazy_load"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="LazyLoad" />
+
         <item
             android:id="@+id/glide"
             android:icon="@drawable/ic_menu_camera"
@@ -10,19 +17,16 @@
             android:id="@+id/picasso"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Picasso" />
-        <item
-            android:id="@+id/lazy_load"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="LazyLoad" />
+        </item>
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="AppItems">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/team_players"
+
+                android:title="Squad" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
