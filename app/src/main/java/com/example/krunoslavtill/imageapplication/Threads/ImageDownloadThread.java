@@ -3,9 +3,12 @@ package com.example.krunoslavtill.imageapplication.Threads;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
-import com.example.krunoslavtill.imageapplication.Models.ThreadModels.ImageThreadParameters;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.PrevPicture;
+import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.News;
+import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.Players;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.SinglePlayer;
+import com.example.krunoslavtill.imageapplication.Models.Models.Threads.ImageThreadParameters;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.PrevPicture;
 import com.example.krunoslavtill.imageapplication.Utils.ImageLoaderConfig;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -18,32 +21,37 @@ import java.util.List;
  */
 public class ImageDownloadThread  {
     ImageThreadParameters itp;
+    List<News> newsList = new ArrayList<>();
+    List<Homenews> homenewsList;
     public ImageDownloadThread(final ImageThreadParameters itp) {
         this.itp=itp;
         final long startTime = System.currentTimeMillis();
         new Thread(new Runnable() {
             public void run() {
 
-                Log.d("Messages", "usao u dretvu async");
+
                 ImageLoader imageLoader = ImageLoader.getInstance();
                 boolean threadFlag = itp.isThreadFlag();
                 int width = itp.getWidth();
                 Context appContext = itp.getAppContext();
-                List<Homenews> homenewsList = itp.getHomenewsList();
+                //List<Homenews> homenewsList = itp.getHomenewsList();
                 if (threadFlag) {
 
                     ImageLoaderConfig ilc = new ImageLoaderConfig(appContext);
                     Registry.getInstance().set("ImageLoaderConfig", ilc);
+
+                    homenewsList = (List<Homenews>) Registry.getInstance().get("homeNewsList");
+
                     List<PrevPicture> prevPictureListURL = new ArrayList<>();
                     List<String> newsURL = new ArrayList<>();
 
                     int position = 0;
                     for (int i = 0; i < homenewsList.size(); i++) {
-
+                        News newsObj= new News();
                         List<PrevPicture> prevPictureList = homenewsList.get(i).getHomepictures().getPrevPictureList();
                         newsURL.add(homenewsList.get(i).getNewsTitle());
                         int smallestDifferance = 0;
-                        // checking if width of picutre is acceptable for with of phone
+                        // checking if width of picutre is acceptable for width of phone
                         for (int loop = 0; loop < prevPictureList.size(); loop++) {
 
 
@@ -61,14 +69,18 @@ public class ImageDownloadThread  {
 
                         }
                         //Glide.with(getApplicationContext()).load(prevPictureList.get(position).getPicURL()).downloadOnly(500,500);
+
                         imageLoader.loadImage(prevPictureList.get(position).getPicURL(), null);
-                        Log.d("Display", "broj ispisa" + i + "pozicija" + position + " ima najmanju velicinu : " + String.valueOf(smallestDifferance));
-                        prevPictureListURL.add(prevPictureList.get(position));
+                        //prevPictureListURL.add(prevPictureList.get(position));
+                        newsObj.setNewsTitle(homenewsList.get(i).getNewsTitle());
+                        newsObj.setPictureUrl(prevPictureList.get(position).getPicURL());
+                        newsList.add(newsObj);
 
 
                     }
-                    Registry.getInstance().set("pictures", prevPictureListURL);
-                    Registry.getInstance().set("newsURL", newsURL);
+                    //Registry.getInstance().set("pictures", prevPictureListURL);
+                    //Registry.getInstance().set("newsURL", newsURL);
+                    Registry.getInstance().set("NewsObjects",newsList);
 
 
 

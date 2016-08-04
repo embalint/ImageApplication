@@ -1,6 +1,6 @@
 package com.example.krunoslavtill.imageapplication.APIcalls;
 
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Meritum;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

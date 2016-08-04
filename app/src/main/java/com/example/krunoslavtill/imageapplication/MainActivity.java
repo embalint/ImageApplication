@@ -7,8 +7,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.example.krunoslavtill.imageapplication.APIcalls.GetImage;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Meritum;
 import com.example.krunoslavtill.imageapplication.Threads.RetrofitListFillerThread;
 import com.example.krunoslavtill.imageapplication.Utils.HttpErrorHandler;
 import com.example.krunoslavtill.imageapplication.Utils.ServiceGenerator;

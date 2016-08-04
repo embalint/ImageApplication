@@ -3,10 +3,10 @@ package com.example.krunoslavtill.imageapplication.Threads;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.SinglePlayer;
-import com.example.krunoslavtill.imageapplication.Models.ThreadModels.ImageThreadParameters;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.SinglePlayer;
+import com.example.krunoslavtill.imageapplication.Models.Models.Threads.ImageThreadParameters;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class RetrofitListFillerThread {
 
                 Registry.getInstance().set("homeNewsList", homenewsList);
                 Registry.getInstance().set("allPlayersList", allPlayersList);
+
                 new PlayerPicturesDownloadThread(width,applicationContext);
                 ImageThreadParameters itp = new ImageThreadParameters();
                 itp.setWidth(width);

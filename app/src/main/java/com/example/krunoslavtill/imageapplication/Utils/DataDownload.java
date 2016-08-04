@@ -5,9 +5,9 @@ import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.example.krunoslavtill.imageapplication.APIcalls.GetImage;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Homenews;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.Meritum;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.PrevPicture;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Homenews;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.Meritum;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.PrevPicture;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 
 import java.util.ArrayList;

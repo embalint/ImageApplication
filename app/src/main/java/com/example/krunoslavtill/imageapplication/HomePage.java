@@ -2,10 +2,10 @@ package com.example.krunoslavtill.imageapplication;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,12 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.krunoslavtill.imageapplication.Adapters.ImageAdapter;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.AllPlayerPictures;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.PlayerPictures;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.PrevPicture;
+import com.example.krunoslavtill.imageapplication.Fragments.SquadFragment;
+import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.News;
+import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.Players;
 import com.example.krunoslavtill.imageapplication.Utils.VerticalSpaceItemDecoration;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 
@@ -32,16 +33,23 @@ public class HomePage extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private static final int VERTICAL_ITEM_SPACE = 8;
     String imageFramework;
+    ImageAdapter imageAdapter;
     List<String> picturesList= new ArrayList<>();
     List<String> playerPicturesUrl= new ArrayList<>();
-    List<String> newsURL,playerNames;
-    ImageAdapter imageAdapter;
+    List<String> playerNames= new ArrayList<>();
+    List<String> newsURL= new ArrayList<>();
+    List<Players> listOfAllPlayersAtributes;
+    List<News> listAllNews;
+    TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tv= (TextView) findViewById(R.id.headerSquad);
+        tv.setVisibility(View.INVISIBLE);
         setSupportActionBar(toolbar);
         imageFramework="LazyLoad";
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -54,14 +62,8 @@ public class HomePage extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.galleryRecyclerView);
-        Log.d("emil", Glide.getPhotoCacheDir(getApplicationContext()).getPath());
 
-        newsURL = (List<String>) Registry.getInstance().get("newsURL");
-
-        List<PrevPicture> prevPictureListList = (List<PrevPicture>) Registry.getInstance().get("pictures");
-        for (int i=0;i<prevPictureListList.size();i++){
-            picturesList.add(prevPictureListList.get(i).getPicURL());
-        }
+        addNewsInfo();
         addPlayersPictures();
         imageAdapter = new ImageAdapter(getApplicationContext(),picturesList,newsURL,imageFramework);
 
@@ -71,10 +73,11 @@ public class HomePage extends AppCompatActivity
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
         mRecyclerView.setAdapter(imageAdapter);
+        //header.attachTo(mRecyclerView);
 
     }
+
 
 
 
@@ -176,13 +179,22 @@ public class HomePage extends AppCompatActivity
             Toast.makeText(getApplication(), "You choised Picasso Framework",
                     Toast.LENGTH_LONG).show();
                     */
+            // Begin the transaction
+            /*
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_squad, new SquadFragment())
+                    .addToBackStack(null)
+                    .commit();
+            */
+            tv.setVisibility(View.VISIBLE);
             imageFramework="Squad";
             imageAdapter = new ImageAdapter(getApplicationContext(),playerPicturesUrl,playerNames,imageFramework);
 
             mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
             // here i can manage how many columms i will have
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
-            
+
             mRecyclerView.setLayoutManager(layoutManager);
 
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -198,11 +210,22 @@ public class HomePage extends AppCompatActivity
         return true;
     }
     private void addPlayersPictures() {
-        playerNames = (List<String>) Registry.getInstance().get("playerNames");
 
-        List<AllPlayerPictures> allPlayerPicturesList = (List<AllPlayerPictures>) Registry.getInstance().get("playerPictures");
-        for (int i=0;i<allPlayerPicturesList.size();i++){
-            playerPicturesUrl.add(allPlayerPicturesList.get(i).getPicURL());
+        listOfAllPlayersAtributes = (List<Players>) Registry.getInstance().get("Players");
+       // List<AllPlayerPictures> allPlayerPicturesList = (List<AllPlayerPictures>) Registry.getInstance().get("playerPictures");
+
+
+        for (int i=0;i<listOfAllPlayersAtributes.size();i++){
+            playerPicturesUrl.add(listOfAllPlayersAtributes.get(i).getPlayerPicture());
+            playerNames.add(listOfAllPlayersAtributes.get(i).getPlayerName());
+        }
+    }
+    private void addNewsInfo() {
+        listAllNews = (List<News>) Registry.getInstance().get("NewsObjects");
+
+        for (int i=0;i<listAllNews.size();i++){
+            newsURL.add(listAllNews.get(i).getNewsTitle());
+            picturesList.add(listAllNews.get(i).getPictureUrl());
         }
     }
 }

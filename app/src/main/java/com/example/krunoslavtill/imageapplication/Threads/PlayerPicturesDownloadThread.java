@@ -3,9 +3,9 @@ package com.example.krunoslavtill.imageapplication.Threads;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.krunoslavtill.imageapplication.RetrofitModels.AllPlayerPictures;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.PrevPicture;
-import com.example.krunoslavtill.imageapplication.RetrofitModels.SinglePlayer;
+import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.Players;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.AllPlayerPictures;
+import com.example.krunoslavtill.imageapplication.Models.Models.RetrofitModels.SinglePlayer;
 import com.example.krunoslavtill.imageapplication.Utils.ImageLoaderConfig;
 import com.example.krunoslavtill.imageapplication.object.carriers.Registry;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,9 +20,12 @@ public class PlayerPicturesDownloadThread {
     int width;
     Context applicationContext;
     List<SinglePlayer> allPlayersList;
+    List<Players> listOfAllPlayersAtributes = new ArrayList<>();
+
+
     public PlayerPicturesDownloadThread(final int width, final Context applicationContext) {
-        this.width=width;
-        this.applicationContext=applicationContext;
+        this.width = width;
+        this.applicationContext = applicationContext;
 
         new Thread(new Runnable() {
             public void run() {
@@ -30,51 +33,48 @@ public class PlayerPicturesDownloadThread {
                 ImageLoader imageLoader = ImageLoader.getInstance();
 
 
-                    allPlayersList= (List<SinglePlayer>) Registry.getInstance().get("allPlayersList");
-                    ImageLoaderConfig ilc = new ImageLoaderConfig(applicationContext);
-                    Registry.getInstance().set("ImageLoaderConfig", ilc);
+                allPlayersList = (List<SinglePlayer>) Registry.getInstance().get("allPlayersList");
+                ImageLoaderConfig ilc = new ImageLoaderConfig(applicationContext);
+                Registry.getInstance().set("ImageLoaderConfig", ilc);
 
-                    List<AllPlayerPictures> allPlayerPicturesList = new ArrayList<>();
-                    List<String> playersNames = new ArrayList<>();
+                int position = 0;
+                for (int i = 0; i < allPlayersList.size(); i++) {
 
-                    int position = 0;
-                    for (int i = 0; i < allPlayersList.size(); i++) {
+                    Players player = new Players();
+                    List<AllPlayerPictures> playerPicturesList = allPlayersList.get(i).getPlayerPictures().getAllPlayerPicturesList();
 
-                        List<AllPlayerPictures> playerPicturesList = allPlayersList.get(i).getPlayerPictures().getAllPlayerPicturesList();
-                        playersNames.add(allPlayersList.get(i).getPlayerName());
-                        int smallestDifferance = 0;
-                        // checking if width of picutre is acceptable for with of phone
-                        for (int loop = 0; loop < playerPicturesList.size(); loop++) {
+                    player.setPlayerName(allPlayersList.get(i).getPlayerName());
+                    player.setPlayerNumber(Integer.parseInt(allPlayersList.get(i).getPlayerNumber()));
 
 
-                            int currientWidth = Integer.parseInt(playerPicturesList.get(0).getPicWidth());
-                            int startDifferance = Math.abs(width - currientWidth);
-                            int dinamicWidth = Integer.parseInt(playerPicturesList.get(loop).getPicWidth());
-                            int otherDifference = Math.abs(width - dinamicWidth);
-                            if (startDifferance == otherDifference) {
-                                smallestDifferance = startDifferance;
-                            }
-                            if (otherDifference < smallestDifferance) {
-                                smallestDifferance = otherDifference;
-                                position = loop;
-                            }
+                    int smallestDifferance = 0;
+                    // checking if width of picutre is acceptable for width of phone
+                    for (int loop = 0; loop < playerPicturesList.size(); loop++) {
 
+
+                        int currientWidth = Integer.parseInt(playerPicturesList.get(0).getPicWidth());
+                        int startDifferance = Math.abs(width - currientWidth);
+                        int dinamicWidth = Integer.parseInt(playerPicturesList.get(loop).getPicWidth());
+                        int otherDifference = Math.abs(width - dinamicWidth);
+                        if (startDifferance == otherDifference) {
+                            smallestDifferance = startDifferance;
                         }
-                        //Glide.with(getApplicationContext()).load(prevPictureList.get(position).getPicURL()).downloadOnly(500,500);
-                        imageLoader.loadImage(playerPicturesList.get(position).getPicURL(), null);
-                        Log.d("Display", "broj ispisa" + i + "pozicija" + position + " ima najmanju velicinu : " + String.valueOf(smallestDifferance));
-                        allPlayerPicturesList.add(playerPicturesList.get(position));
-
+                        if (otherDifference < smallestDifferance) {
+                            smallestDifferance = otherDifference;
+                            position = loop;
+                        }
 
                     }
-                    Registry.getInstance().set("playerPictures", allPlayerPicturesList);
-                    Registry.getInstance().set("playerNames", playersNames);
 
+                    //download of picturess
+                    imageLoader.loadImage(playerPicturesList.get(position).getPicURL(), null);
+                    player.setPlayerPicture(playerPicturesList.get(position).getPicURL());
+                    // list of all player objects
+                    listOfAllPlayersAtributes.add(player);
 
+                }
+                Registry.getInstance().set("Players", listOfAllPlayersAtributes);
 
-
-                //long endtime = System.currentTimeMillis()-startTime;
-                //Log.d("TimeApp","time of thread is : "+ endtime);
 
             }
         }).start();
