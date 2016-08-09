@@ -11,16 +11,6 @@
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_home_page">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Squad"
-        android:id="@+id/headerSquad"
-        android:layout_gravity="center_horizontal"
-        android:textAlignment="center"
-        android:background="#091f4b"
-        android:textColor="@color/abc_primary_text_material_dark" />
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

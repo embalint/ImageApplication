@@ -45,6 +45,7 @@ public class PlayerPicturesDownloadThread {
 
                     player.setPlayerName(allPlayersList.get(i).getPlayerName());
                     player.setPlayerNumber(Integer.parseInt(allPlayersList.get(i).getPlayerNumber()));
+                    player.setPlayerPostion(allPlayersList.get(i).getPlayerPosition());
 
 
                     int smallestDifferance = 0;

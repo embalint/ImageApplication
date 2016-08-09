@@ -17,6 +17,17 @@ public class SinglePlayer {
     @Element(name = "playerPictures")
     private PlayerPictures playerPictures;
 
+    @Element(name = "playerPosition")
+    private String playerPosition;
+
+    public String getPlayerPosition() {
+        return playerPosition;
+    }
+
+    public void setPlayerPosition(String playerPosition) {
+        this.playerPosition = playerPosition;
+    }
+
     public String getPlayerName() {
         return playerName;
     }
