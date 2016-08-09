@@ -263,7 +263,7 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
                 if(listOfAllPlayersAtributes.get(position).getPlayerPostion().equals("Portero")){
-                    tv.setText("Goalkeper");
+                    //tv.setText("Goalkeper");
                     //sectionPosition=0;
                     //position=position-1;
 

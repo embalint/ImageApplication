@@ -12,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.krunoslavtill.imageapplication.Adapters.GridListAdapter;
 import com.example.krunoslavtill.imageapplication.Adapters.ImageAdapter;
+import com.example.krunoslavtill.imageapplication.Models.Models.FragmentModels.ChildItem;
+import com.example.krunoslavtill.imageapplication.Models.Models.FragmentModels.HeaderItem;
+import com.example.krunoslavtill.imageapplication.Models.Models.FragmentModels.Item;
 import com.example.krunoslavtill.imageapplication.Models.Models.FragmentModels.SquadModel;
 import com.example.krunoslavtill.imageapplication.Models.Models.ReadingListModels.Players;
 import com.example.krunoslavtill.imageapplication.R;
@@ -27,10 +31,12 @@ import java.util.List;
  */
 public class SquadFragment extends android.support.v4.app.Fragment {
     List<Players> listOfAllPlayersAtributes = (List<Players>) Registry.getInstance().get("Players");
-    List<String> playerPicturesUrl= new ArrayList<>();
-    List<String> playerNames= new ArrayList<>();
-    List<Integer> playersNumber= new ArrayList<>();
-
+    List<Item> itemList=new ArrayList<>();
+    List<Players> helpListKeeper=new ArrayList<>();
+    List<Players> helpListDefense=new ArrayList<>();
+    List<Players> helpListMidd=new ArrayList<>();
+    List<Players> helpListAtt=new ArrayList<>();
+    private GridListAdapter mAdapter;
     String imageFramework;
     @Nullable
     @Override
@@ -43,6 +49,7 @@ public class SquadFragment extends android.support.v4.app.Fragment {
         SquadModel sm = (SquadModel) Registry.getInstance().get("SquadModel");
         RecyclerView mRecyclerView;
         mRecyclerView = (RecyclerView) view.findViewById(R.id.squad_recycle_view);
+        /*
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -54,33 +61,78 @@ public class SquadFragment extends android.support.v4.app.Fragment {
 
             }
         }));
+*/
         //addPlayersAtributes();
         //ImageAdapter imageAdapter = new ImageAdapter(context,listOfAllPlayersAtributes,sm.getImageFramework());
 
 
         //mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(sm.getItemSpace()));
         // here i can manage how many columms i will have
+
         GridLayoutManager layoutManager = new GridLayoutManager(context, 2);
 
-        ImageAdapter imageAdapter = new ImageAdapter(context,listOfAllPlayersAtributes,sm.getImageFramework(),layoutManager);
+        //ImageAdapter imageAdapter = new ImageAdapter(context,listOfAllPlayersAtributes,sm.getImageFramework(),layoutManager);
+        mAdapter = new GridListAdapter(context,imageFramework,layoutManager,itemList);
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mRecyclerView.setAdapter(imageAdapter);
+        mRecyclerView.setAdapter(mAdapter);
+        addRecyclerItems();
 
         return view;
     }
-    private void addPlayersAtributes() {
 
-        listOfAllPlayersAtributes = (List<Players>) Registry.getInstance().get("Players");
-        // List<AllPlayerPictures> allPlayerPicturesList = (List<AllPlayerPictures>) Registry.getInstance().get("playerPictures");
-
+    private void addRecyclerItems() {
+        boolean obrana=false;
+        boolean sredina=false;
+        mAdapter.addItem(new HeaderItem("Golman"));
 
         for (int i=0;i<listOfAllPlayersAtributes.size();i++){
-            playerPicturesUrl.add(listOfAllPlayersAtributes.get(i).getPlayerPicture());
-            playerNames.add(listOfAllPlayersAtributes.get(i).getPlayerName());
-            playersNumber.add(listOfAllPlayersAtributes.get(i).getPlayerNumber());
+            if (listOfAllPlayersAtributes.get(i).getPlayerPostion().equals("Portero")){
+                mAdapter.addItem(new ChildItem(String.valueOf(listOfAllPlayersAtributes.get(i).getPlayerNumber()),
+                        listOfAllPlayersAtributes.get(i).getPlayerName(),
+                        listOfAllPlayersAtributes.get(i).getPlayerPicture()));
+                        helpListKeeper.add(listOfAllPlayersAtributes.get(i));
+
+            }
+
         }
+        mAdapter.addItem(new HeaderItem("Obrana"));
+        for (int i=0;i<listOfAllPlayersAtributes.size();i++){
+            if (listOfAllPlayersAtributes.get(i).getPlayerPostion().equals("Defensa")){
+                mAdapter.addItem(new ChildItem(String.valueOf(listOfAllPlayersAtributes.get(i).getPlayerNumber()),
+                        listOfAllPlayersAtributes.get(i).getPlayerName(),
+                        listOfAllPlayersAtributes.get(i).getPlayerPicture()));
+                helpListKeeper.add(listOfAllPlayersAtributes.get(i));
+
+            }
+
+        }
+        mAdapter.addItem(new HeaderItem("Sredina"));
+        for (int i=0;i<listOfAllPlayersAtributes.size();i++){
+            if (listOfAllPlayersAtributes.get(i).getPlayerPostion().equals("Volante")){
+                mAdapter.addItem(new ChildItem(String.valueOf(listOfAllPlayersAtributes.get(i).getPlayerNumber()),
+                        listOfAllPlayersAtributes.get(i).getPlayerName(),
+                        listOfAllPlayersAtributes.get(i).getPlayerPicture()));
+                helpListKeeper.add(listOfAllPlayersAtributes.get(i));
+
+            }
+
+        }
+        mAdapter.addItem(new HeaderItem("Napad"));
+        for (int i=0;i<listOfAllPlayersAtributes.size();i++){
+            if (listOfAllPlayersAtributes.get(i).getPlayerPostion().equals("Delantero")){
+                mAdapter.addItem(new ChildItem(String.valueOf(listOfAllPlayersAtributes.get(i).getPlayerNumber()),
+                        listOfAllPlayersAtributes.get(i).getPlayerName(),
+                        listOfAllPlayersAtributes.get(i).getPlayerPicture()));
+                helpListKeeper.add(listOfAllPlayersAtributes.get(i));
+
+            }
+
+        }
+
     }
+
+
 }
