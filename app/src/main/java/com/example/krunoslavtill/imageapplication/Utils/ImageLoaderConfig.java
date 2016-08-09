@@ -3,6 +3,7 @@ package com.example.krunoslavtill.imageapplication.Utils;
 import android.content.Context;
 
 import com.example.krunoslavtill.imageapplication.LazyLoad.ImageLoader;
+import com.example.krunoslavtill.imageapplication.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -17,6 +18,9 @@ public class ImageLoaderConfig {
         this.context = context;
         com.nostra13.universalimageloader.core.ImageLoader imageLoader= com.nostra13.universalimageloader.core.ImageLoader.getInstance();
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                //.showImageOnLoading(R.drawable.placeholder_dim) // resource or drawable
+                //.showImageForEmptyUri(R.drawable.placeholder_dim) // resource or drawable
+                .showImageOnFail(R.drawable.placeholder_dim)
                 .cacheOnDisk(true)
                 .cacheInMemory(true).build();
 
