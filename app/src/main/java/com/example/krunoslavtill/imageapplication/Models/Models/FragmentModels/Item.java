@@ -10,11 +10,4 @@ public abstract class Item {
 
     public abstract int getTypeItem();
 
-    public Item(String itemTitle){
-        this.itemTitle=itemTitle;
-    }
-
-    public String getItemTitle() {
-        return itemTitle;
-    }
 }
